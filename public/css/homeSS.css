@@ -1,11 +1,12 @@
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: #7b7b7b;
+    /* color: #3f3f3f; */
     -webkit-appearance: none;
 }
-body{
+
+body {
     overflow: hidden;
 }
 
@@ -13,64 +14,139 @@ body{
     width: 100vw;
     height: 100vh;
     /* background-color: whitesmoke; */
-    background-image: url('https://images-ext-2.discordapp.net/external/lzNYY4cQ-V-dW2eYN0OLXnL0zVgJ6N8iITaWbZzQI-o/%3Falt%3Dmedia%26token%3Db515303a-5290-462e-837f-50c43822e11d/https/firebasestorage.googleapis.com/v0/b/the-phisherman.appspot.com/o/duotone%2520%282%29-min.png?width=1246&height=701');
+    /* background-image: url('https://images-ext-2.discordapp.net/external/lzNYY4cQ-V-dW2eYN0OLXnL0zVgJ6N8iITaWbZzQI-o/%3Falt%3Dmedia%26token%3Db515303a-5290-462e-837f-50c43822e11d/https/firebasestorage.googleapis.com/v0/b/the-phisherman.appspot.com/o/duotone%2520%282%29-min.png?width=1246&height=701'); */
+    /* background-image: url('https://www.wallpaperflare.com/static/58/429/285/space-invaders-minimalism-video-games-retro-games-wallpaper.jpg');
     background-size: cover;
-    background-position: center;
-    
+    background-position: right; */
+    /* background-image: url('/images/bg_image.png'); */
+    background-color: turquoise;
+    background-size: cover;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.2);
     /* background: linear-gradient(45deg, #560027, rgb(154, 22, 22), #F47A03 99%); */
+}
+
+#home_container h1 {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 56px;
+    color: black;
+}
+
+#red {
+    text-shadow: 0px 0px 0px red, 1px 1px 0px red, 2px 2px 0px red, 3px 3px 0px red, 4px 4px 0px red, 5px 5px 0px red, 6px 6px 0px red, 7px 7px 0px red, 8px 8px 0px red, 9px 9px 0px red, 10px 10px 0px red, 11px 11px 0px red, 12px 12px 0px red, 13px 13px 0px red;
+}
+
+#orange {
+    text-shadow: 0px 0px 0px orange, 1px 1px 0px orange, 2px 2px 0px orange, 3px 3px 0px orange, 4px 4px 0px orange, 5px 5px 0px orange, 6px 6px 0px orange, 7px 7px 0px orange, 8px 8px 0px orange, 9px 9px 0px orange, 10px 10px 0px orange, 11px 11px 0px orange, 12px 12px 0px orange, 13px 13px 0px orange;
+}
+
+#yellow {
+    text-shadow: 0px 0px 0px yellow, 1px 1px 0px yellow, 2px 2px 0px yellow, 3px 3px 0px yellow, 4px 4px 0px yellow, 5px 5px 0px yellow, 6px 6px 0px yellow, 7px 7px 0px yellow, 8px 8px 0px yellow, 9px 9px 0px yellow, 10px 10px 0px yellow, 11px 11px 0px yellow, 12px 12px 0px yellow, 13px 13px 0px yellow;
+}
+
+#green {
+    text-shadow: 0px 0px 0px green, 1px 1px 0px green, 2px 2px 0px green, 3px 3px 0px green, 4px 4px 0px green, 5px 5px 0px green, 6px 6px 0px green, 7px 7px 0px green, 8px 8px 0px green, 9px 9px 0px green, 10px 10px 0px green, 11px 11px 0px green, 12px 12px 0px green, 13px 13px 0px green;
+}
+
+#blue {
+    text-shadow: 0px 0px 0px blue, 1px 1px 0px blue, 2px 2px 0px blue, 3px 3px 0px blue, 4px 4px 0px blue, 5px 5px 0px blue, 6px 6px 0px blue, 7px 7px 0px blue, 8px 8px 0px blue, 9px 9px 0px blue, 10px 10px 0px blue, 11px 11px 0px blue, 12px 12px 0px blue, 13px 13px 0px blue;
+}
+
+#violet {
+    text-shadow: 0px 0px 0px violet, 1px 1px 0px violet, 2px 2px 0px violet, 3px 3px 0px violet, 4px 4px 0px violet, 5px 5px 0px violet, 6px 6px 0px violet, 7px 7px 0px violet, 8px 8px 0px violet, 9px 9px 0px violet, 10px 10px 0px violet, 11px 11px 0px violet, 12px 12px 0px violet, 13px 13px 0px violet;
+}
+
+#indigo {
+    text-shadow: 0px 0px 0px indigo, 1px 1px 0px indigo, 2px 2px 0px indigo, 3px 3px 0px indigo, 4px 4px 0px indigo, 5px 5px 0px indigo, 6px 6px 0px indigo, 7px 7px 0px indigo, 8px 8px 0px indigo, 9px 9px 0px indigo, 10px 10px 0px indigo, 11px 11px 0px indigo, 12px 12px 0px indigo, 13px 13px 0px indigo;
 }
 
 #home_container menu {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform:translate(-50%, -50%);
-    min-width: 40%;     
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
     margin: auto;
+    background-color: rgba(0, 0, 0, 0.1);
 
     padding: 25px;
-   
-    border-radius: 10px;
-    background-color: whitesmoke;
-    box-shadow: inset 3px 3px 6px 1px #c6c6c6
+    border-radius: 5px;
+    box-shadow: inset 0 0 6px 3px rgba(51, 51, 51, 0.5);
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
-#home_container menu ul{
+#menu_container {
+    margin: auto;
+}
+
+#home_container menu ul {
     text-align: center;
     list-style-type: none;
+    width: 100%;
 }
 
-#home_container menu ul li{
+#home_container menu ul li {
     margin: 15px auto 0 auto;
-    width: fit-content;
-    box-shadow: 3px 3px 4px 1px #c6c6c6, -3px -3px 4px 1px #ffffff;
-    border-radius: 10px;
+    width: 100%;
     padding: 5px;
 }
 
-li button{
+li button {
+    width: fit-content;
+    list-style-type: none;
     text-decoration: none;
     border: none;
     outline: none;
     padding: 5px;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 3px 3px 0 2px black;
+ 
+    font-size: 32px;
 }
-#name_input{
+
+#name_input {
     background: transparent;
     margin-top: 5px;
     border: none;
-    padding-left: 10px;
-    border-radius:5px;
-    padding: 10px;
-    box-shadow: inset 3px 3px 4px 1px #c6c6c6, inset -3px -3px 4px 1px #ffffff;
+    font-size: 32px;
+
+    padding: 5px 0 5px 5px;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 3px 3px 0 2px black;
+    width: 100%;
 }
 
-#name_input:focus{
+#name_input:focus {
     outline: none;
 }
 
+#name_input::placeholder{
+    color: rgba(0, 0, 0, 0.6);
+}
 
-@media screen and (min-width:800px) {
+@media screen and (max-width:540px){
+    #home_container h1{
+        text-align: center;
+    }
+}
+@media screen and (max-width:360px) {
+    #home_container h1{
+        top: 12%;
+    }
+    #name_input{
+        font-size: 22px; 
+    }
     #home_container menu{
-        min-width: 30%;
+        padding-top: 10px;
+    }
+    li button{
+        font-size: 22px;
     }
 }

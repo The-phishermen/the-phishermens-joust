@@ -22,9 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	let socket = io();
 	let streaming = false;
 	let colour = document.getElementById('colour');
-	let sendingId =  document.getElementById('u_id').innerHTML;
-	let orientation = document.getElementById('orientation');
-
+	let sendingId =  document.getElementById('u_id').innerText;
+	// let orientation = document.getElementById('orientation');
 	setInterval(() => {
 		colour_value -= cooldown;
 		if (colour_value < 0) {
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		colour.className = 'csspinner line back-and-forth no-overlay';
 		colour.style.display = 'block';
 		document.activeElement.blur();
-		socket.emit('player-join', sendingId.value);
+		socket.emit('player-join', sendingId);
 		return false;
 	})()
 
@@ -61,20 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			background.style.backgroundColor = getRgb(colour_value, soft_threshold);
-
-			if (game_over && !alerted) {
-				game_over = false;
-				alerted = true;
-				setTimeout(() => {
-					alert('You lose :(');
-				}, 100);
-				setTimeout(() => {
-					alerted = false;
-				}, 3000);
+			if(game_over){
+				socket.emit('eliminated',{sender:sendingId})
 			}
-
 			socket.emit('motion', {
-				sender: sendingId.value,
+				sender: sendingId,
 				rgb: getRgb(colour_value, soft_threshold)
 			});
 		};

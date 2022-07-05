@@ -11,8 +11,9 @@ const socketio = require('socket.io');
 let server, io;
 
 // --- gloabal variables ---
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 const players = [];
+let out_count = 0;
 
 // -------------------------
 
@@ -43,34 +44,11 @@ app.get('/', function (req, res) {
 
 app.post('/game', function (req, res) {
 	let username = req.body.username;
-	res.render('game.ejs', {username});
+	res.render('game.ejs', { username });
 });
 
-//temporary dummy data for viewings
-let dummy = [
-	{
-		_id:'1',
-		_name:'Harold',
-		_rank:3,
-	},
-	{
-		_id:'2',
-		_name:'J0hnee',
-		_rank:4,
-	},
-	{
-		_id:'3',
-		_name:'Michael',
-		_rank:0,
-	},
-	{
-		_id:'1',
-		_name:'Harold',
-		_rank:0,
-	},
-]
 app.get('/spectate', function (req, res) {
-	res.render('spectator.ejs' ,{dummy});
+	res.render('spectator.ejs', { players });
 });
 
 const ssl = https.createServer(
@@ -90,10 +68,13 @@ io = socketio(ssl);
 io.sockets.on('connection', function (socket) {
 	//add the socket id to stack of objects based on id
 	socket.on('player-join', (data) => {
-		let player = { username: data, id: socket.id, rgb: 'rgb(0, 0, 0)' };
+		console.log(data)
+		let player = { username: data, id: socket.id, rgb: 'rgb(0, 0, 0)', rank: 0 };
+		console.log(player)
 		players.push(player);
 		console.log("User '" + data + "' joined");
 		io.sockets.emit('message', player);
+		io.sockets.emit('add-player', true)
 	});
 
 	socket.on('motion', function (data) {
@@ -106,11 +87,16 @@ io.sockets.on('connection', function (socket) {
 		if (players[index] != null) {
 			players[index].rgb = rgb;
 		}
-
 		if (rgb == 'rgb(255, 0, 0)') {
-			console.log(players[index].username + ' eliminated.');
+			// console.log(players[index].username + ' eliminated.');
+			io.sockets.emit('remove-player', true)
 		}
-
+		socket.on('eliminated',data=>{
+			const index = players.findIndex((object) => {
+				return object.username === data.sender;
+			});
+			players[index].rank = out_count++;
+		})
 		io.sockets.emit('motion-update', players[index]);
 	});
 
@@ -133,9 +119,5 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 
-	socket.on('player-join',(player)=>{
-		let u_player = { _name: player, _id: socket.id, rgb: 'rgb(0, 0, 0)', _rank:0 };
-		dummy.push(u_player)
-		io.sockets.emit('add-player', player);
-	})
+
 });

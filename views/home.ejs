@@ -11,24 +11,33 @@
 
 <body id="body">
     <div id="home_container">
+        <h1><span id="red">J</span><span id="orange">S</span> <span id="yellow">J</span><span id="green">O</span><span
+                id="blue">U</span><span id="violet">S</span><span id="indigo">T</span></h1>
         <menu>
-            <form action="/game" method="POST">
+            <section id="menu_container">
+                <form action="/game" method="POST">
+                    <ul>
+                        <input id='name_input' type="text" placeholder="Name" name="username">
+                        <li><button id="player" type="submit">Player</button></li>
+                    </ul>
+                </form>
                 <ul>
-                    <input id='name_input' type="text" placeholder="Name" name="username">
-                    <li><button id="player" type="submit">Player</button></li>
+                    <li><button id="spectator">Spectator</button></li>
                 </ul>
-            </form>
-            <li><button id="spectator">Spectator</button></li>
+            </section>
         </menu>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        let socket = io();
         let player = document.getElementById('player');
         let spectator = document.getElementById('spectator');
+
+        let socket = io();
+
         player.addEventListener('click', () => {
             //create player object and send it
-            socket.emit('player-join', document.getElementById('name_input').value)
+            
+            //user is redirected on the post request
         })
         spectator.addEventListener('click', () => {
             window.location = '/spectate'
