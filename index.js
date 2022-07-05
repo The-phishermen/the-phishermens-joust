@@ -104,7 +104,7 @@ io.sockets.on('connection', function (socket) {
 		});
 		//using a set for players that are currently out to count unique names to avoid duplicate problem above
 		p_out.add(players[index])
-		players[index].rank = p_out.size;
+		players[index].rank = players.length - p_out.size +1;
 		io.sockets.emit('remove-player', {username:index})
 		return;
 	})
