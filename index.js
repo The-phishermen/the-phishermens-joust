@@ -48,31 +48,29 @@ app.get('/game', function (req, res) {
 //temporary dummy data for viewings
 let dummy = [
 	{
-		_id:'1',
-		_name:'Harold',
-		_rank:3,
+		_id: '1',
+		_name: 'Harold',
+		_rank: 3,
 	},
 	{
-		_id:'2',
-		_name:'J0hnee',
-		_rank:4,
+		_id: '2',
+		_name: 'J0hnee',
+		_rank: 4,
 	},
 	{
-		_id:'3',
-		_name:'Michael',
-		_rank:0,
+		_id: '3',
+		_name: 'Michael',
+		_rank: 0,
 	},
 	{
-		_id:'1',
-		_name:'Harold',
-		_rank:0,
+		_id: '1',
+		_name: 'Harold',
+		_rank: 0,
 	},
-]
+];
 app.get('/spectate', function (req, res) {
-	res.render('spectator.ejs' ,{dummy});
+	res.render('spectator.ejs', { dummy });
 });
-
-app.use(express.static(path.join(__dirname, 'public')));
 
 const ssl = https.createServer(
 	{
@@ -90,11 +88,30 @@ io = socketio(ssl);
 
 io.sockets.on('connection', function (socket) {
 	//add the socket id to stack of objects based on id
-	socket.on('player-join', (data) => {
-		let player = { username: data, id: socket.id, rgb: 'rgb(0, 0, 0)' };
-		players.push(player);
-		console.log("User '" + data + "' joined");
-		io.sockets.emit('message', player);
+	socket.on('player-join', (user_name) => {
+		if (user_name.trim() != '') {
+			if (user_name == 'admin') {
+				socket.emit('redirect', '/admin');
+			} else {
+				let player = {
+					username: user_name,
+					id: socket.id,
+					rgb: 'rgb(0, 0, 0)',
+				};
+				players.push(player);
+				console.log("User '" + user_name + "' connected");
+				io.emit('player-connected', player);
+			}
+		} else {
+			console.log(
+				'Blank user attempted connection, redirecting user to login page...'
+			);
+			socket.emit('redirect', '/');
+		}
+	});
+
+	socket.on('request-players', (data) => {
+		socket.emit('player-load', players);
 	});
 
 	socket.on('motion', function (data) {
@@ -106,10 +123,9 @@ io.sockets.on('connection', function (socket) {
 		});
 		if (players[index] != null) {
 			players[index].rgb = rgb;
-		}
-
-		if (rgb == 'rgb(255, 0, 0)') {
-			console.log(players[index].username + ' eliminated.');
+			if (rgb == 'rgb(255, 0, 0)') {
+				console.log(players[index].username + ' eliminated.');
+			}
 		}
 
 		io.sockets.emit('motion-update', players[index]);
@@ -123,14 +139,16 @@ io.sockets.on('connection', function (socket) {
 	// });
 
 	socket.on('disconnect', () => {
-		const index = players.findIndex((object) => {
-			return object.id === socket.id;
-		});
-
-		if (index >= 0) {
-			username = players[index].username;
-			players.splice(index, 1);
-			console.log(username + ' disconnected');
+		if (players != null) {
+			const index = players.findIndex((object) => {
+				return object.id === socket.id;
+			});
+			if (index >= 0) {
+				username = players[index].username;
+				io.emit('player-disconnected', players[index]);
+				players.splice(index, 1);
+				console.log("User '" + username + "' disconnected");
+			}
 		}
 	});
 });

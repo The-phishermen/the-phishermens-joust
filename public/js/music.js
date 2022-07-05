@@ -1,4 +1,3 @@
-
 let bpm_offset = 0;
 const bpmelem = document.getElementById("bpm");
 bpmelem.innerText = bpm_offset;
