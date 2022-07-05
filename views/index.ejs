@@ -12,9 +12,23 @@
       <input type="text" id="sending-id" placeholder="Enter an ID for this measurement" autocorrect="off" autocapitalize="off">
       <input type="submit" value="Start Streaming">
     </form>
+    
+
+    <button id="accelPermsButton"  style="height:50px;" onclick="getAccel()"><h1>Get Accelerometer Permissions</h1></button>
+
+
     <div id="status" style="width: 100vw; height: 100vh;"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/player.js"></script>
     <script src="/js/fullscreen.js"></script>
+    <script>function getAccel(){
+      DeviceMotionEvent.requestPermission().then(response => {
+          if (response == 'granted') {
+              console.log("accelerometer permission granted");
+              // Do stuff here
+          }
+      });
+    }</script>
   </body>
+
 </html>
