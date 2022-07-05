@@ -54,6 +54,27 @@ body{
     
     padding: 5px;
 }
+
+#qr_code {
+    position: absolute;
+    top: 95%;
+    left: 75%;
+    transform:translate(-90%, -95%);  
+    margin: auto;
+
+    /*padding: 25px;*/
+   
+    width: 200px;
+    height: 200px;
+    /* background-color: whitesmoke; */
+    background-image: url("/images/qr_home.png");
+    background-repeat: no-repeat;
+
+    background-size: center;
+    background-position: bottom center;
+    object-fit: contain;
+    /* background: linear-gradient(45deg, #560027, rgb(154, 22, 22), #F47A03 99%); */
+}
 #name_input{
     background: transparent;
     margin-top: 5px;
