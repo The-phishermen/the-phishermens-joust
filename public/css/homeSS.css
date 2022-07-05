@@ -13,7 +13,7 @@ body{
     width: 100vw;
     height: 100vh;
     /* background-color: whitesmoke; */
-    background-image: url('https://images-ext-2.discordapp.net/external/lzNYY4cQ-V-dW2eYN0OLXnL0zVgJ6N8iITaWbZzQI-o/%3Falt%3Dmedia%26token%3Db515303a-5290-462e-837f-50c43822e11d/https/firebasestorage.googleapis.com/v0/b/the-phisherman.appspot.com/o/duotone%2520%282%29-min.png?width=1246&height=701');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/the-phisherman.appspot.com/o/retro%20server%20background.jpg?alt=media&token=60b3c232-41b8-45ff-a346-78a6a84aaf33');
     background-size: cover;
     background-position: center;
     
@@ -55,26 +55,6 @@ body{
     padding: 5px;
 }
 
-#qr_code {
-    position: absolute;
-    top: 95%;
-    left: 75%;
-    transform:translate(-90%, -95%);  
-    margin: auto;
-
-    /*padding: 25px;*/
-   
-    width: 200px;
-    height: 200px;
-    /* background-color: whitesmoke; */
-    background-image: url("/images/qr_home.png");
-    background-repeat: no-repeat;
-
-    background-size: center;
-    background-position: bottom center;
-    object-fit: contain;
-    /* background: linear-gradient(45deg, #560027, rgb(154, 22, 22), #F47A03 99%); */
-}
 #name_input{
     background: transparent;
     margin-top: 5px;
