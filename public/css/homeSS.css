@@ -18,10 +18,10 @@ body {
     /* background-image: url('https://www.wallpaperflare.com/static/58/429/285/space-invaders-minimalism-video-games-retro-games-wallpaper.jpg');
     background-size: cover;
     background-position: right; */
-    /* background-image: url('/images/bg_image.png'); */
-    background-color: turquoise;
-    background-size: cover;
-    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.2);
+    background-image: url('https://images-ext-2.discordapp.net/external/hBZiXAPUuFEyuVS5Lkbwkb2GoyfmAUmIbSoCdqJYAl4/%3Falt%3Dmedia%26token%3D60b3c232-41b8-45ff-a346-78a6a84aaf33/https/firebasestorage.googleapis.com/v0/b/the-phisherman.appspot.com/o/retro%2520server%2520background.jpg?width=1113&height=701');
+
+    background-size: contain;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4);
     /* background: linear-gradient(45deg, #560027, rgb(154, 22, 22), #F47A03 99%); */
 }
 

@@ -13,6 +13,7 @@ let server, io;
 // --- gloabal variables ---
 app.use(bodyParser.urlencoded({ extended: false }))
 const players = [];
+let p_out = new Set();
 let out_count = 0;
 
 // -------------------------
@@ -46,6 +47,10 @@ app.post('/game', function (req, res) {
 	let username = req.body.username;
 	res.render('game.ejs', { username });
 });
+
+app.get('/eliminated', (req, res)=>{
+	res.send("You were eliminated")
+})
 
 app.get('/spectate', function (req, res) {
 	res.render('spectator.ejs', { players });
@@ -89,17 +94,20 @@ io.sockets.on('connection', function (socket) {
 		}
 		if (rgb == 'rgb(255, 0, 0)') {
 			// console.log(players[index].username + ' eliminated.');
-			io.sockets.emit('remove-player', true)
 		}
-		socket.on('eliminated',data=>{
-			const index = players.findIndex((object) => {
-				return object.username === data.sender;
-			});
-			players[index].rank = out_count++;
-		})
 		io.sockets.emit('motion-update', players[index]);
 	});
-
+	//problem is that this runs for a short amount of time before stopping, adding 10's of numbers to the counter
+	socket.on('eliminated',data=>{
+		const index = players.findIndex((object) => {
+			return object.username === data.sender;
+		});
+		//using a set for players that are currently out to count unique names to avoid duplicate problem above
+		p_out.add(players[index])
+		players[index].rank = p_out.size;
+		io.sockets.emit('remove-player', {username:index})
+		return;
+	})
 	// socket.on('orientation', function (data) {
 	// console.log(
 	// 	'ORIENTATION: ' + data.alpha + ' ' + data.beta + ' ' + data.gamma

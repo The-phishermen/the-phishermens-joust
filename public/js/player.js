@@ -56,12 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			if (colour_value > soft_threshold || total > hard_threshold) {
 				colour_value = soft_threshold;
-				game_over = true;
+				socket.emit('eliminated',{sender:sendingId})
+				// game_over = true;
 			}
 
 			background.style.backgroundColor = getRgb(colour_value, soft_threshold);
 			if(game_over){
 				socket.emit('eliminated',{sender:sendingId})
+				game_over = false;
+				return;
 			}
 			socket.emit('motion', {
 				sender: sendingId,

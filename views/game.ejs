@@ -16,15 +16,18 @@
         <div id="colour" style="width: 100vw; height:100vh">
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/player.js"></script>
     <script>
+        let socket = io();
         document.addEventListener('DOMContentLoaded', function () {
             let bg = document.getElementById('background')
             window.addEventListener('load', () => {
                 if ((navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))) {
                     let btn = document.createElement('button');
-                    btn.addEventListener('click',getAccel)
+                    btn.addEventListener('click', getAccel)
                     btn.style = 'height:50px;'
-                    btn.innerHTML="Get accelerometer access"
+                    btn.innerHTML = "Get accelerometer access"
                     bg.appendChild(btn);
                 }
                 function getAccel() {
@@ -35,10 +38,16 @@
                         }
                     });
                 }
-            })})
+            })
+            socket.on('remove-player',(player)=>{
+                if(document.getElementById('u_id').value.trim()==player.username){
+                    document.removeEventListener('DOMContentLoaded');
+                }
+            })
+        })
+
+
     </script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/player.js"></script>
 </body>
 
 </html>
