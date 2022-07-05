@@ -12,13 +12,28 @@
 <body id="body">
     <div id="home_container">
         <menu>
-            <ul>
-                <input id='name_input' type="text" placeholder="Name">
-                <li><a href="/game">Player</a></li>
-                <li><a href="/spectate">Spectator</a></li>
-            </ul>
+            <form action="/game" method="POST">
+                <ul>
+                    <input id='name_input' type="text" placeholder="Name" name="username">
+                    <li><button id="player" type="submit">Player</button></li>
+                </ul>
+            </form>
+            <li><button id="spectator">Spectator</button></li>
         </menu>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+        let player = document.getElementById('player');
+        let spectator = document.getElementById('spectator');
+        player.addEventListener('click', () => {
+            //create player object and send it
+            socket.emit('player-join', document.getElementById('name_input').value)
+        })
+        spectator.addEventListener('click', () => {
+            window.location = '/spectate'
+        })
+    </script>
     <script src="/js/fullscreen.js"></script>
 </body>
 

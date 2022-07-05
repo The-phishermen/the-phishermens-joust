@@ -48,10 +48,10 @@ body{
     padding: 5px;
 }
 
-#home_container menu ul li a{
-    
+li button{
     text-decoration: none;
-    
+    border: none;
+    outline: none;
     padding: 5px;
 }
 #name_input{

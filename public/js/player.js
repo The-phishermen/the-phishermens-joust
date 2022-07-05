@@ -6,7 +6,7 @@ const cooldown = 0.003;
 let game_over = false;
 let alerted = false;
 
-const background = document.getElementById('status');
+const background = document.getElementById('background');
 
 function getRgb(value, threshold) {
 	if (value <= threshold / 2) {
@@ -21,9 +21,8 @@ function getRgb(value, threshold) {
 document.addEventListener('DOMContentLoaded', function () {
 	let socket = io();
 	let streaming = false;
-	let status = document.getElementById('status');
-	let sendingId = document.getElementById('sending-id');
-	let form = document.getElementById('enter');
+	let colour = document.getElementById('colour');
+	let sendingId =  document.getElementById('u_id').innerHTML;
 	let orientation = document.getElementById('orientation');
 
 	setInterval(() => {
@@ -33,18 +32,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}, 10);
 
-	let startStreaming = function (e) {
-		e.preventDefault();
+	let startStreaming = (function (e) {
+		// e.preventDefault();
 		streaming = true;
-		form.style.display = 'none';
-		status.className = 'csspinner line back-and-forth no-overlay';
-		status.style.display = 'block';
+		// form.style.display = 'none';
+		colour.className = 'csspinner line back-and-forth no-overlay';
+		colour.style.display = 'block';
 		document.activeElement.blur();
 		socket.emit('player-join', sendingId.value);
 		return false;
-	};
+	})()
 
-	form.addEventListener('submit', startStreaming);
 
 	if (window.DeviceMotionEvent !== undefined) {
 		window.ondevicemotion = function (e) {
@@ -81,18 +79,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		};
 	} else {
-		status.style.display = 'block';
-		status.innerHTML =
+		colour.style.display = 'block';
+		colour.innerHTML =
 			'Unfortunately, this device does not have the right sensors.';
 	}
 });
 
-DeviceMotionEvent.requestPermission()
-	.then((response) => {
-		if (response == 'granted') {
-			window.addEventListener('devicemotion', (e) => {
-				// do something with e
-			});
-		}
-	})
-	.catch(console.error);
+

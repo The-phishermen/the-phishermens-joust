@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOUST!</title>
+</head>
+
+<body>
+    <div id="background">
+        <h1 id="u_id">
+            <%= username %>
+        </h1>
+        <div id="colour" style="width: 100vw; height:100vh">
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let bg = document.getElementById('background')
+            window.addEventListener('load', () => {
+                if ((navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))) {
+                    let btn = document.createElement('button');
+                    btn.addEventListener('click',getAccel)
+                    btn.style = 'height:50px;'
+                    btn.innerHTML="Get accelerometer access"
+                    bg.appendChild(btn);
+                }
+                function getAccel() {
+                    DeviceMotionEvent.requestPermission().then(response => {
+                        if (response == 'granted') {
+                            console.log("accelerometer permission granted");
+                            // Do stuff here
+                        }
+                    });
+                }
+            })})
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/player.js"></script>
+</body>
+
+</html>

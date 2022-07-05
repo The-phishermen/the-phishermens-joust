@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const ejs = require('ejs');
-
+const bodyParser = require('body-parser')
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
@@ -11,7 +11,7 @@ const socketio = require('socket.io');
 let server, io;
 
 // --- gloabal variables ---
-
+app.use(bodyParser.urlencoded({extended:false}))
 const players = [];
 
 // -------------------------
@@ -41,8 +41,9 @@ app.get('/', function (req, res) {
 	res.render('home.ejs');
 });
 
-app.get('/game', function (req, res) {
-	res.render('index.ejs');
+app.post('/game', function (req, res) {
+	let username = req.body.username;
+	res.render('game.ejs', {username});
 });
 
 //temporary dummy data for viewings
@@ -131,4 +132,10 @@ io.sockets.on('connection', function (socket) {
 			console.log(username + ' disconnected');
 		}
 	});
+
+	socket.on('player-join',(player)=>{
+		let u_player = { _name: player, _id: socket.id, rgb: 'rgb(0, 0, 0)', _rank:0 };
+		dummy.push(u_player)
+		io.sockets.emit('add-player', player);
+	})
 });

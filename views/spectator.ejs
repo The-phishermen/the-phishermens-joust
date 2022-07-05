@@ -17,7 +17,7 @@
                 <span>Player</span>
             </header>
             <section>
-                <ol>
+                <ol id="list">
                     <% dummy.sort((a,b)=>a._rank-b._rank) %> 
                     <% dummy.forEach(obj=>{ %>
                         <% if(obj._rank==0){ %>
@@ -38,6 +38,23 @@
             </section>
         </section>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+        let list = document.getElementById('list');
+        socket.on('add-player', (player)=>{
+            let user = document.createElement('li');
+            user.className = 'in';
+            let span1 = document.createElement('span');
+            span1.innerHTML = "Playing";
+            let span2 = document.createElement('span');
+            span2.innerHTML = player;
+            user.appendChild(span1);
+            user.appendChild(span2);
+            list.appendChild(user);
+            location.reload();
+        })
+    </script>
     <script src="/js/fullscreen.js"></script>
 </body>
 
