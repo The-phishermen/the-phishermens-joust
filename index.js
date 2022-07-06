@@ -6,7 +6,7 @@ const ejs = require('ejs');
 
 const fs = require('fs');
 const path = require('path');
-const https = require('https');
+const http = require('http');
 const socketio = require('socket.io');
 let server, io;
 
@@ -72,19 +72,22 @@ app.get('/spectate', function (req, res) {
 	res.render('spectator.ejs', { dummy });
 });
 
-const ssl = https.createServer(
-	{
-		key: fs.readFileSync(path.join(__dirname, './certs/key.pem'), 'utf-8'),
-		cert: fs.readFileSync(path.join(__dirname, './certs/cert.pem'), 'utf-8'),
-	},
-	app
-);
+//const ssl = https.createServer(
+	// {
+	// 	key: fs.readFileSync(path.join(__dirname, './certs/key.pem'), 'utf-8'),
+	// 	cert: fs.readFileSync(path.join(__dirname, './certs/cert.pem'), 'utf-8'),
+	// },
+	// app
+//);
 
-ssl.listen(process.env.PORT, () => {
-	console.log(`Server is active on port: ${process.env.PORT}`);
-});
+server = http.Server(app);
+server.listen(5000);
 
-io = socketio(ssl);
+// app.listen(process.env.PORT, () => {
+// 	console.log(`Server is active on port: ${process.env.PORT}`);
+// });
+
+io = socketio(server);
 
 io.sockets.on('connection', function (socket) {
 	//add the socket id to stack of objects based on id
