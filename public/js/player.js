@@ -6,7 +6,7 @@ const cooldown = 0.003;
 let game_over = false;
 let alerted = false;
 
-const background = document.getElementById('background');
+const background = document.getElementById('colour');
 
 function getRgb(value, threshold) {
 	if (value <= threshold / 2) {
@@ -21,7 +21,7 @@ function getRgb(value, threshold) {
 document.addEventListener('DOMContentLoaded', function () {
 	let socket = io();
 	let streaming = false;
-	let colour = document.getElementById('colour');
+	// let colour = document.getElementById('colour');
 	let sendingId =  document.getElementById('u_id').innerText;
 	// let orientation = document.getElementById('orientation');
 	setInterval(() => {
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		// e.preventDefault();
 		streaming = true;
 		// form.style.display = 'none';
-		colour.className = 'csspinner line back-and-forth no-overlay';
-		colour.style.display = 'block';
+		// colour.className = 'csspinner line back-and-forth no-overlay';
+		// colour.style.display = 'block';
 		document.activeElement.blur();
 		socket.emit('player-join', sendingId);
 		return false;

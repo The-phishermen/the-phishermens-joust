@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/gameSS.css" rel="stylesheet" type="text/css">
     <title>JOUST!</title>
 </head>
 
@@ -13,11 +14,12 @@
         <h1 id="u_id">
             <%= username %>
         </h1>
-        <div id="colour" style="width: 100vw; height:100vh">
+        <div id="colour">
         </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/player.js"></script>
+    <script src="/js/fullscreen.js"></script>
     <script>
         let socket = io();
         document.addEventListener('DOMContentLoaded', function () {
@@ -39,8 +41,8 @@
                     });
                 }
             })
-            socket.on('remove-player',(player)=>{
-                if(document.getElementById('u_id').value.trim()==player.username){
+            socket.on('remove-player', (player) => {
+                if (document.getElementById('u_id').value.trim() == player.username) {
                     document.removeEventListener('DOMContentLoaded');
                 }
             })
