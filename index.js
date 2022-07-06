@@ -81,7 +81,7 @@ app.get('/spectate', function (req, res) {
 //);
 
 server = http.Server(app);
-server.listen(5000);
+server.listen(process.env.PORT);
 
 // app.listen(process.env.PORT, () => {
 // 	console.log(`Server is active on port: ${process.env.PORT}`);
