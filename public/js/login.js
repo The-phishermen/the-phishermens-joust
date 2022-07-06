@@ -20,6 +20,7 @@ button.addEventListener('click', (e) => {
 	socket.emit('availability-check', sendingId.value);
 });
 
+
 function getRgb(value, threshold) {
 	if (value <= threshold / 2) {
 		let red = (2 * (255 * value)) / threshold;
@@ -111,9 +112,9 @@ if (window.DeviceMotionEvent !== undefined) {
 				heading.innerHTML = 'Ready';
 				heading.style.color = 'rgb(36, 209, 134)';
 
-				if (!document.fullscreenElement) {
-					document.documentElement.requestFullscreen();
-				}
+				// if (!(navigatorID.platform && /iPad|iPhone|iPod/.test(navigatorID.platform)) && !document.fullscreenElement) {
+				// 	document.documentElement.requestFullscreen();
+				// }
 				motionTracking = false;
 				playerStatus = 'ready';
 
