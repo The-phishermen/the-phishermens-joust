@@ -10,7 +10,7 @@
     /* outline: 1px solid white;    */
 }
 
-body {
+#main_container {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -120,4 +120,17 @@ h2 {
     padding: 3%;
     background-color: rgb(36, 209, 134);
     border-radius: 20px;
+}
+
+#btn_back{
+    width: 24px;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    top: 0px;
+    left: 10px;
+}
+
+#btn_back svg{
+    width: 100%;
 }

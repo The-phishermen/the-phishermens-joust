@@ -38,15 +38,58 @@ h1 {
 }
 
 h2 {
-    font-size: 2vmax;
+    font-size: 3vmax;
     padding: 2%;
 }
 
 h3 {
-    font-size: 1.5vmax;
+    font-size: 2vmax;
     padding: 3%;
 }
 
+#j_1{
+    color: rgb(209, 36, 36);
+    animation: colour_change 1.5s infinite;
+}
+#j_2{
+    color: rgb(209, 149, 36);
+    animation: colour_change 3s infinite;
+}
+#j_3{
+    color: rgb(209, 203, 36);
+    animation: colour_change 2s infinite;
+}
+#j_4{
+    color: rgb(36, 209, 134);
+    animation: colour_change 5s infinite;
+}
+#j_5{
+    color: rgb(36, 50, 209);
+    animation: colour_change 2.5s infinite;
+}
+@keyframes colour_change{
+    0%{
+        color: rgb(209, 36, 36);
+    }
+    19%{
+        color: rgb(209, 149, 36);
+    }
+    38%{
+        color: rgb(209, 203, 36);
+    }
+    57%{
+        color: rgb(36, 209, 134);
+    }
+    66%{
+        color: rgb(36, 50, 209);
+    }
+    85%{
+        color: rgb(94, 36, 209);
+    }
+    100%{
+        color: rgb(195, 36, 209);
+    }
+}
 a {
     text-decoration: none;
 }

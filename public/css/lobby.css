@@ -243,3 +243,15 @@ p {
     background: rgb(36, 209, 134);
     cursor: pointer;
 }
+#btn_back{
+    width: 24px;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    top: -15px;
+    left: 10px;
+}
+
+#btn_back svg{
+    width: 100%;
+}

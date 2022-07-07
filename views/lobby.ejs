@@ -11,75 +11,80 @@
 </head>
 
 <body>
-    <header>
-        <h1>The Phisherman's <span style="color: rgb(36, 209, 134)">Joust</span></h1>
-    </header>
-    <div class="container">
-        <div class="left-container">
-            <div class="qr-info">
-                <div class="qr-container">
-                    <img src="../images/qrcode.png" alt="qrcode" class="qrcode">
+    <div id="main_container">
+        <button id="btn_back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="47.56" viewBox="0 0 50 47.56"><defs><style>.cls-1{fill:#111}.cls-2{fill:#00c569}</style></defs><title>Back_2</title><g id="Layer_2" data-name="Layer 2"><g id="Back_2"><path class="cls-1" d="M47.5 22.36h-45a2.63 2.63 0 0 0-.49.05l-.21.07a1.29 1.29 0 0 0-.26.08 1.67 1.67 0 0 0-.23.12 1.24 1.24 0 0 0-.2.1 2.55 2.55 0 0 0-.69.7l-.11.19a1.79 1.79 0 0 0-.12.24c0 .08 0 .17-.08.25a1.66 1.66 0 0 0-.06.21 2.31 2.31 0 0 0 0 1 1.8 1.8 0 0 0 .06.22c0 .08.05.17.08.25s.08.16.12.24l.11.19a1.91 1.91 0 0 0 .31.38l20.19 20.17a2.5 2.5 0 0 0 3.54-3.53L8.53 27.36h39a2.5 2.5 0 0 0 0-5z" id="id_111" style="fill: rgb(255, 255, 255);"></path><rect class="cls-2" x="1.82" y="7.68" width="26.73" height="5" rx="2.5" ry="2.5" transform="rotate(-45 15.187 10.18)" id="id_112"></rect></g></g></svg>
+        </button>
+        <header>
+            <h1>The Phisherman's <span style="color: rgb(36, 209, 134)">Joust</span></h1>
+        </header>
+        <div class="container">
+            <div class="left-container">
+                <div class="qr-info">
+                    <div class="qr-container">
+                        <img src="../images/qrcode.png" alt="qrcode" class="qrcode">
+                    </div>
                 </div>
-            </div>
-            <div class="other-info">
-                <div class="url">
-                    url: https://the-phishermen-joust.herokuapp.com/
+                <div class="other-info">
+                    <div class="url">
+                        url: https://the-phishermen-joust.herokuapp.com/
+                    </div>
+    
                 </div>
-
-            </div>
-            <div class="start-button-container">
-                <div class="start-button" id="start-game">
-                    Start Game
+                <div class="start-button-container">
+                    <div class="start-button" id="start-game">
+                        Start Game
+                    </div>
                 </div>
+    
             </div>
-
+                <div class="right-top-container">
+                    <ul class="player-ul">
+                        <li class="header-li">
+                            <div class="player">Player</div>
+                            <div class="status">Status</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="right-bottom-container">
+                    <div class="button-container">
+                        <div class="button" id="pause-music">
+                            Pause
+                        </div>
+                    </div>
+    
+                    <div class="button-container">
+                        <div class="button" id="restart-music">
+                            Restart
+                        </div>
+                    </div>
+    
+                    <!-- <div class="button-container">
+                        <div class="button" id="increase-music">
+                            Faster
+                        </div>
+                    </div>
+    
+                    <div class="button-container">
+                        <div class="button" id="decrease-music">
+                            Slower
+                        </div>
+                    </div> -->
+    
+                    <div class="music-label" id="music-bpm" style="padding-left: 2%;">
+                        Music Speed: <span style="color: rgb(36, 209, 134)">100%</span>
+                    </div>
+    
+                    <div class="music-label" id="music-interval" style="padding-right: 2%;">
+                        Seconds to next speed change:
+                    </div>
+    
+                    <div class="slider-container">
+                        <input type="range" min="-40" max="90" value="0" class="slider" id="music-slider">
+                    </div>
+    
+                </div>
         </div>
-            <div class="right-top-container">
-                <ul class="player-ul">
-                    <li class="header-li">
-                        <div class="player">Player</div>
-                        <div class="status">Status</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="right-bottom-container">
-                <div class="button-container">
-                    <div class="button" id="pause-music">
-                        Pause
-                    </div>
-                </div>
-
-                <div class="button-container">
-                    <div class="button" id="restart-music">
-                        Restart
-                    </div>
-                </div>
-
-                <!-- <div class="button-container">
-                    <div class="button" id="increase-music">
-                        Faster
-                    </div>
-                </div>
-
-                <div class="button-container">
-                    <div class="button" id="decrease-music">
-                        Slower
-                    </div>
-                </div> -->
-
-                <div class="music-label" id="music-bpm" style="padding-left: 2%;">
-                    Music Speed: <span style="color: rgb(36, 209, 134)">100%</span>
-                </div>
-
-                <div class="music-label" id="music-interval" style="padding-right: 2%;">
-                    Seconds to next speed change:
-                </div>
-
-                <div class="slider-container">
-                    <input type="range" min="-40" max="90" value="0" class="slider" id="music-slider">
-                </div>
-
-            </div>
     </div>
 </body>
 <script src="/socket.io/socket.io.js"></script>
@@ -89,5 +94,7 @@
 <script src="/lib/Tone.min.js"></script>
 <script src="/js/music.js"></script>
 <!-- END MUSIC SCRIPTS -->
+
+<script src="/js/back.js"></script>
 
 </html>

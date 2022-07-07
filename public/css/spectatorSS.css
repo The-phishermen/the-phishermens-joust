@@ -73,3 +73,14 @@ section ol li{
 .out{
     color: red;
 }
+#btn_back{
+    width: 24px;
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    top: 0px;
+    left: 10px;
+}
+#btn_back svg{
+    width: 100%;
+}
