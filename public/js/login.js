@@ -40,7 +40,7 @@ function getRgb(value, threshold) {
 // })
 
 //BPM CHANGES
-socket.on('bpm-change', function(threshold_percentage) {
+socket.on('bpm-change', function (threshold_percentage) {
 	hard_threshold *= threshold_percentage;
 	soft_threshold *= threshold_percentage;
 });
@@ -100,8 +100,8 @@ if (window.DeviceMotionEvent !== undefined) {
 		if (playerStatus == 'waiting') {
 			let total = Math.sqrt(
 				Math.pow(e.acceleration.x, 2) +
-					Math.pow(e.acceleration.y, 2) +
-					Math.pow(e.acceleration.z, 2)
+				Math.pow(e.acceleration.y, 2) +
+				Math.pow(e.acceleration.z, 2)
 			);
 
 			indicator_value += sensitivity * total;
@@ -129,15 +129,28 @@ if (window.DeviceMotionEvent !== undefined) {
 				indicator.style.clipPath = `circle(0% at 50% 150%)`;
 			}
 
-			indicator.style.clipPath = `circle(${
-				150 * indicator_value + 50
-			}% at 50% 150%)`;
+			indicator.style.clipPath = `circle(${150 * indicator_value + 50
+				}% at 50% 150%)`;
 		} else if (playerStatus == 'playing') {
-			
+		//Powers
+			// var randNum = Math.floor(Math.random() * 10) + 1;
+			// var timeleft = 10;
+			// var downloadTimer = setInterval(function () {
+			// 	if (timeleft <= 0) {
+			// 		clearInterval(downloadTimer);
+			// 	}
+			// 	document.getElementById("progressBar").value = 10 - timeleft;
+			// 	timeleft -= 1;
+			// }, 1000);
+
+			// if (true) {
+			// 	this.alert("here");
+			// }
+
 			let total_acceleration = Math.sqrt(
 				Math.pow(e.acceleration.x, 2) +
-					Math.pow(e.acceleration.y, 2) +
-					Math.pow(e.acceleration.z, 2)
+				Math.pow(e.acceleration.y, 2) +
+				Math.pow(e.acceleration.z, 2)
 			);
 
 			// //Rate of change of Acceleration
@@ -174,14 +187,14 @@ if (window.DeviceMotionEvent !== undefined) {
 			socket.emit('status-change', {
 				status: playerStatus,
 				colour: getRgb(colour_value, soft_threshold),
-                value: colour_value/soft_threshold
+				value: colour_value / soft_threshold
 			});
 
 			container.style.backgroundColor = getRgb(colour_value, soft_threshold);
 
 			if (game_over && !alerted) {
-				
-				
+
+
 				game_over = false;
 				alerted = true;
 				setTimeout(() => {
