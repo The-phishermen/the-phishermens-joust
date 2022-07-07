@@ -8,6 +8,8 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
+const { v4: uuidv4 } = require('uuid');
+
 const socketio = require('socket.io');
 let server, io;
 
@@ -31,8 +33,13 @@ app.get('/', function (req, res) {
 app.get('/login', function (req, res) {
 	res.render('login.ejs');
 });
+
 app.get('/play', function (req, res) {
 	res.render('login.ejs');
+});
+
+app.get('/game', function (req, res) {
+	res.render('game.ejs');
 });
 
 // app.get('/game', function (req, res) {
@@ -98,27 +105,46 @@ io.sockets.on('connection', function (socket) {
 	//add the socket id to stack of objects based on id
 	socket.on('availability-check', (user_name) => {
 		if (user_name.trim() != '') {
+			var session_id = uuidv4(); //generating the sessions_id and then binding that socket to that sessions 
 			if (players != null) {
 				const index = players.findIndex((object) => {
 					return object.username === user_name;
 				});
 
 				if (index > -1) {
-					socket.emit('availability-response', false);
+					socket.emit('availability-response', { available: false });
 				} else {
-					socket.emit('availability-response', true);
-					createPlayer(user_name, socket.id);
+					console.log('available');
+					socket.room = session_id;
+					socket.join(socket.room, function(res) {
+						console.log("created successfully");
+						socket.emit('availability-response', {available: true, sessionId: session_id });
+					});
+					createPlayer(user_name, session_id);
 				}
 			} else {
-				socket.emit('availability-response', true);
-				createPlayer(user_name, socket.id);
+				socket.join(socket.room, function(res) {
+					console.log("created successfully");
+					socket.emit('availability-response', {available: true, sessionId: session_id });
+				});
+				createPlayer(user_name, session_id);
 			}
 		} else {
 			console.log(
 				'Blank user attempted connection, redirecting user to login page...'
 			);
-			socket.emit('redirect', '/');
+			socket.emit('redirect', '/play');
 		}
+	});
+
+	socket.on('reconnect-socket', function (data) {
+		console.log("============reconnecting"+data.sessionId+"================");
+		console.log(data);
+		socket.room = data.sessionId;  //this time using the same session 
+		socket.join(socket.room, function(res) {
+			console.log("reconnected successfully ");
+			socket.emit("reconnect-acknowledgement", { sessionId: data.sessionId });
+		});
 	});
 
 	// socket.on('login-check', () => {
@@ -171,6 +197,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('status-change', (status) => {
+		console.log(status);
 		if (players != null) {
 			const index = players.findIndex((object) => {
 				return object.id === socket.id;
@@ -193,12 +220,11 @@ io.sockets.on('connection', function (socket) {
 		}
 	});
 
-	// socket.on('orientation', function (data) {
-	// console.log(
-	// 	'ORIENTATION: ' + data.alpha + ' ' + data.beta + ' ' + data.gamma
-	// );
-	// console.log('ORIENTATION OBJECT: ' + JSON.stringify(data, null, 4) + '\n');
-	// });
+	socket.on('orientation', function (data) {
+		console.log(
+			'ORIENTATION: ' + data.alpha + ' ' + data.beta + ' ' + data.gamma
+		);
+	});
 
 	socket.on('disconnect', () => {
 		if (players != null) {

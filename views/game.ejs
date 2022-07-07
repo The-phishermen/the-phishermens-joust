@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <header>
+        <h1>The Phisherman's <span style="color: rgb(36, 209, 134)">Joust</span></h1>
+    </header>
+    <div class="container" id="colour-block">
+        <div class="status-sheet">
+            <h2>Shake your phone to ready up!</h2>
+        </div>
+        <div class="indicator-sheet"></div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let bg = document.getElementById('colour-block')
+        let container = document.getElementById('container_details');
+        window.addEventListener('load', () => {
+            if ((navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))) {
+                container.style = "display: none;"
+                let btn = document.createElement('button');
+                btn.addEventListener('click', getAccel)
+                btn.style = 'height:50px;'
+                btn.innerHTML = "Get accelerometer access"
+                bg.appendChild(btn);
+            }
+            function getAccel() {
+                DeviceMotionEvent.requestPermission().then(response => {
+                    if (response == 'granted') {
+                        console.log("accelerometer permission granted");
+                        this.style.display = 'none';
+                        container.style = "display: block;"
+                    }
+                });
+            }
+        })
+    })
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/fullscreen.js"></script>
+<script src="/js/login.js"></script>
+
+</html>
